@@ -29,7 +29,7 @@ Regex, also known as regular expressions, are a fundamental tool in coding and s
 
  - The `$` character represents the end of a string and matches everything that preceeds the `$`.
 
- - In this example, `/^[a-z0-9_-]{3,16}$/`, using the `^` anchor will include `[a-z0-9_-]` while the `$` anchor includes `{3,16}`.
+ - In this example, `/^[hello][world]$/`, using the `^` anchor will include `[hello]` while the `$` anchor includes `[world]`.
 
 ### Quantifiers
 
@@ -57,13 +57,13 @@ As regular expressions grow more complicated, grouping constructs allow you to c
 
 The following example contains two grouping constructs or subexpressions:
 
-`(abc):(xyz)`
+`(123):(456)`
 
-- The first subexpression is looking for a part of the string that matches the string "abc" exactly.
+- The first subexpression is looking for a part of the string that matches the string "123" exactly.
 
-- The second subexpression is looking for "xyz".
+- The second subexpression is looking for "456".
 
-- In between the subexpressions, we have a colon (:). Thus, the string "abc:xyz" would match, but the string "acb:xyz" would not.
+- In between the subexpressions, we have a colon (:). Thus, the string "123:457" would match, but the string "132:456" would not.
 
 - Unlike bracket expressions, subexpressions look for an exact match unless they're told to do otherwise.
 
@@ -80,6 +80,8 @@ Here's how bracket expressions work:
 - A hyphen between alphanumeric characters `[-]` will specify a range of characters within the square brackets using a hyphen. For example, [a-z] matches any lowercase letter from 'a' to 'z'.
 
 - Placing the `^` immediately after the opening square bracket turns the bracket expression into a negative character group, negating the character class. For instance, [^0-9] matches any character that is not a digit.
+
+- Special character `[_-]` when a special character is placed within square brackets `[]`, it loses its special meaning and is treated as a regular character. For example "hello_world" would be a match because it contains an underscore and "123-456" would be a match because it contains a hyphen.
 
 ### Character Classes
 
@@ -103,13 +105,13 @@ The or operator `|` enables you to define multiple options for a specific part o
 
 Using our example in the grouping constructs section, we can take the original expression:
 
-- `(abc):(xyz)`
+- `(123):(456)`
 
 - And then use the OR operator to convert it to the following:
 
-- `(a|b|c):(x|y|z)`
+- `(1|2|3):(4|5|6)`
 
-- Now, both of the strings "abc:xyz" and "acb:xyz" would match, as well as "a:z", but "xyz:abc" would not.
+- Now, both of the strings "123:456" and "132:456" would match, as well as "1:6", but "456:123" would not.
 
 ### Flags
 
